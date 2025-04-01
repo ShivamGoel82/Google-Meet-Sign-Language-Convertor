@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Google Meet Sign Language Recognizer",
+  "version": "1.0",
+  "description": "Converts sign language into subtitles in Google Meet.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://127.0.0.1:5000/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

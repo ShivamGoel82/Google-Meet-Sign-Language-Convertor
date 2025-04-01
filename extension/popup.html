@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sign Language Subtitles</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Captions</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>ASL Subtitles</h2>
-    <button id="toggle">Enable Subtitles</button>
+    <div class="popup-container">
+        <h2>Sign Language Captions</h2>
+        <label class="switch">
+            <input type="checkbox" id="toggleSubtitles">
+            <span class="slider round"></span>
+        </label>
+        <p id="status">Subtitles: Off</p>
+    </div>
     <script src="popup.js"></script>
 </body>
 </html>
