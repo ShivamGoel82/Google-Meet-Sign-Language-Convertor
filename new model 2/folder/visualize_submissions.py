@@ -1,5 +1,4 @@
 import pandas as pd
-from numpy._distributor_init import NUMPY_MKL
 import numpy as np
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix

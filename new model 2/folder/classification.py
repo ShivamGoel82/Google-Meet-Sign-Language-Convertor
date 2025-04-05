@@ -6,15 +6,24 @@ from sklearn.linear_model import LogisticRegression as lr
 import numpy as np
 import sklearn.metrics as sm
 
-train = pd.read_csv("train60.csv")
-print(train.head())
-y = np.array(train.pop('label'))
-x = np.array(train)/255.
-print("here1")
-#train = dataset.iloc[:,1:].values
-test = pd.read_csv("train40.csv")
-label_test=np.array(test.pop('label'))
-x_ = np.array(test)/255.
+def clean_csv(input_file, output_file, expected_cols=9217):
+    with open(input_file, "r") as infile, open(output_file, "w") as outfile:
+        for i, line in enumerate(infile, 1):
+            if len(line.strip().split(",")) == expected_cols:
+                outfile.write(line)
+            else:
+                print(f"⚠️ Skipped line {i} with incorrect column count.")
+                
+clean_csv("train60.csv","newtrain60.csv")
+clean_csv("train40.csv","newtrain40.csv")
+
+train = pd.read_csv("newtrain60.csv", header=None)
+y = np.array(train.iloc[:, 0])
+x = np.array(train.iloc[:, 1:]) / 255.
+
+test = pd.read_csv("newtrain40.csv", header=None)
+label_test = np.array(test.iloc[:, 0])
+x_ = np.array(test.iloc[:, 1:]) / 255.
 print("here2")
 
 def calc_accuracy(method,label_test,pred):
