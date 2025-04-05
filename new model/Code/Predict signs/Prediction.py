@@ -11,6 +11,7 @@ def pred_main():
     from scipy.spatial import distance
     import pyttsx3
     import tensorflow as tf
+    from tensorflow.keras.models import load_model
     from threading import Thread
     from tkinter import messagebox
     import tkinter as tk
@@ -44,11 +45,9 @@ def pred_main():
     else:
         method = 1
 
-    model='files/CNN'
+    model='files/best_model.h5'
 
-    infile = open(model,'rb')
-    cnn = pickle.load(infile)
-    infile.close()
+    cnn = load_model(model)
 
     bg=None
     count=0
@@ -244,7 +243,8 @@ def pred_main():
                 res = cv2.bitwise_and(roi, roi, mask=mask)
                 res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
 
-                (_, cnts, _) = cv2.findContours(res, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cnts, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
                 if len(cnts)>0:
                     max_cont = max(cnts, key=cv2.contourArea)
                     if max_cont is not None:

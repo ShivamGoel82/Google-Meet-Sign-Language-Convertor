@@ -87,7 +87,7 @@ with tf.device('/gpu:0'):
     print(f"--- Validation: {STEP_SIZE_VALID}")
     
     model.fit(train_generator, steps_per_epoch=STEP_SIZE_TRAIN, validation_data=valid_generator,
-              validation_steps=STEP_SIZE_VALID, epochs=10)
+              validation_steps=STEP_SIZE_VALID, epochs=1)
 
     model.evaluate(valid_generator)
     test_generator.reset()
